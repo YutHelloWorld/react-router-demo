@@ -1,6 +1,6 @@
 import React from 'react'
 import { render } from 'react-dom'
-import { Router, Route, Link,IndexLink } from 'react-router'
+import { Router, Route, Link, IndexLink, hashHistory } from 'react-router'
 import { Redirect } from 'react-router'
 import { IndexRoute } from 'react-router'
 import { IndexRedirect,withRouter } from 'react-router'
@@ -59,7 +59,7 @@ const Message_1 = React.createClass({
 const Message = withRouter(Message_1)
 
 render((
-  <Router>
+  <Router history={hashHistory}>
     <Route path="/" component={App}>
       <IndexRoute component={Dashboard} />
       <Route path="about" component={About} />
@@ -74,4 +74,4 @@ render((
       </Route>
     </Route>
   </Router>
-), document.body)
+), document.getElementById('app'))
