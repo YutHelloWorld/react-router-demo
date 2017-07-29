@@ -1,6 +1,6 @@
 import React from 'react'
 import { render } from 'react-dom'
-import { Router, Route, Link, IndexLink, browserHistory } from 'react-router'
+import { Router, Route, Link, IndexLink, hashHistory } from 'react-router'
 import { Redirect } from 'react-router'
 import { IndexRoute } from 'react-router'
 import { IndexRedirect, withRouter } from 'react-router'
@@ -17,9 +17,11 @@ const App     = (props) => (
     {props.children}
   </div>
 )
+
 App.proptypes = {
   children : PropTypes.node
 }
+
 const About   = () => (
   <h3>About</h3>
 )
@@ -35,6 +37,7 @@ const Inbox = (props) => (
 Inbox.proptypes = {
   children : PropTypes.node
 }
+
 const Dashboard = () => (
   <div>Welcome to the app!</div>
 )
@@ -55,7 +58,7 @@ Message_1.propTypes = {
 const Message       = withRouter(Message_1)
 
 render((
-  <Router history={browserHistory}>
+  <Router history={hashHistory}>
     <Route path="/" component={App}>
       <IndexRoute component={Dashboard}/>
       <Route path="about" component={About}/>
