@@ -1,6 +1,6 @@
 # react-router-demo
 
-这是一个入门React-Router的小Demo。
+这是一个入门React-Router的小巧Demo。这个demo里尽量不会为你带来新的所需知识。
 
 ##安装
 
