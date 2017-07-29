@@ -54,15 +54,6 @@ Message_1.propTypes = {
 }
 const Message       = withRouter(Message_1)
 
-import { BrowserRouter, Route } from 'react-router-dom'
-
-/* 路由配置 */
-const RouteConfig =
-        (<BrowserRouter>
-          <Route path="/" component={Main}/>
-          <Route path="/dataspace" component={Data}/>
-        </BrowserRouter>)
-
 render((
   <Router history={browserHistory}>
     <Route path="/" component={App}>
