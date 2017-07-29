@@ -19,5 +19,6 @@ $ npm install
 npm start
 ```
 ## 浏览器查看
-浏览器输入 http://localhost:8080/。代码webpack实现热更新。
+浏览器输入 http://localhost:8080/
+
 
