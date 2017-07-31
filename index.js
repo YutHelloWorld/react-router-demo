@@ -1,12 +1,9 @@
 import React from 'react'
 import { render } from 'react-dom'
-import { Router, Route, Link, IndexLink, hashHistory } from 'react-router'
-import { Redirect } from 'react-router'
-import { IndexRoute } from 'react-router'
-import { IndexRedirect, withRouter } from 'react-router'
+import { Router, Route, Link, IndexLink, hashHistory, IndexRoute, Redirect, IndexRedirect, withRouter  } from 'react-router'
 import PropTypes from 'prop-types'
 
-const App     = (props) => (
+const App = ({ children }) => (
   <div>
     <h1>App</h1>
     <ul>
@@ -14,7 +11,7 @@ const App     = (props) => (
       <li><Link to="/about">About</Link></li>
       <li><Link to="/inbox">Inbox</Link></li>
     </ul>
-    {props.children}
+    {children}
   </div>
 )
 
@@ -22,15 +19,15 @@ App.proptypes = {
   children : PropTypes.node
 }
 
-const About   = () => (
+const About = () => (
   <h3>About</h3>
 )
 
-const Inbox = (props) => (
+const Inbox = ({ children }) => (
   <div>
     <h2>Inbox</h2>
     <Link to="/inbox/messages/5">messages</Link>
-    {props.children}
+    {children}
   </div>
 )
 
@@ -55,9 +52,9 @@ const Message_1 = ({ params }) => (
 Message_1.propTypes = {
   params : PropTypes.object.isRequired
 }
-const Message       = withRouter(Message_1)
+const Message = withRouter(Message_1)
 
-render((
+const routerElement = (
   <Router history={hashHistory}>
     <Route path="/" component={App}>
       <IndexRoute component={Dashboard}/>
@@ -73,4 +70,5 @@ render((
       </Route>
     </Route>
   </Router>
-), document.getElementById('app'))
+)
+render(routerElement, document.getElementById('app'))
