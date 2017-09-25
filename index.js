@@ -1,74 +1,75 @@
 import React from 'react'
+import {
+  HashRouter as Router,
+  Route,
+  NavLink,
+  Switch
+} from 'react-router-dom'
 import { render } from 'react-dom'
-import { Router, Route, Link, IndexLink, hashHistory, IndexRoute, Redirect, IndexRedirect, withRouter  } from 'react-router'
-import PropTypes from 'prop-types'
 
-const App = ({ children }) => (
-  <div>
-    <h1>App</h1>
-    <ul>
-      <li><IndexLink to="/">Dashboard</IndexLink></li>
-      <li><Link to="/about">About</Link></li>
-      <li><Link to="/inbox">Inbox</Link></li>
-    </ul>
-    {children}
-  </div>
-)
+const BasicExample = () => (
+  <Router>
+    <div>
+      <ul>
+        <li><NavLink activeClassName="active" to="/">Home</NavLink></li>
+        <li><NavLink activeClassName="active" to="/about">About</NavLink></li>
+        <li><NavLink activeClassName="active" to="/topics">Topics</NavLink></li>
+      </ul>
 
-App.proptypes = {
-  children : PropTypes.node
-}
-
-const About = () => (
-  <h3>About</h3>
-)
-
-const Inbox = ({ children }) => (
-  <div>
-    <h2>Inbox</h2>
-    <Link to="/inbox/messages/5">messages</Link>
-    {children}
-  </div>
-)
-
-Inbox.proptypes = {
-  children : PropTypes.node
-}
-
-const Dashboard = () => (
-  <div>Welcome to the app!</div>
-)
-
-const InboxHome = () => (
-  <div>
-    <p>Welcome to Inbox!</p>
-  </div>
-)
-
-const Message_1 = ({ params }) => (
-  <h3>Message {params.id}</h3>
-)
-
-Message_1.propTypes = {
-  params : PropTypes.object.isRequired
-}
-const Message = withRouter(Message_1)
-
-const routerElement = (
-  <Router history={hashHistory}>
-    <Route path="/" component={App}>
-      <IndexRoute component={Dashboard}/>
-      <Route path="about" component={About}/>
-      <Route path="inbox" component={Inbox}>
-        <IndexRoute component={InboxHome}/>
-        <Redirect from="messages/:id" to="/messages/:id"/>
-        {/*<IndexRedirect to='/about' />*/}
-
-      </Route>
-      <Route component={Inbox}>
-        <Route path="messages/:id" component={Message}/>
-      </Route>
-    </Route>
+      <hr/>
+      <Switch>
+        <Route exact path="/" component={Home}/>
+        <Route path="/about" component={About}/>
+        <Route path="/topics" component={Topics}/>
+      </Switch>
+    </div>
   </Router>
 )
-render(routerElement, document.getElementById('app'))
+
+const Home = () => (
+  <div>
+    <h2>Home</h2>
+  </div>
+)
+
+const About = () => (
+  <div>
+    <h2>About</h2>
+  </div>
+)
+
+const Topics = ({ match }) => (
+  <div>
+    <h2>Topics</h2>
+    <ul>
+      <li>
+        <NavLink to={`${match.url}/rendering`}>
+          Rendering with React
+        </NavLink>
+      </li>
+      <li>
+        <NavLink to={`${match.url}/components`}>
+          Components
+        </NavLink>
+      </li>
+      <li>
+        <NavLink to={`${match.url}/props-v-state`}>
+          Props v. State
+        </NavLink>
+      </li>
+    </ul>
+
+    <Route path={`${match.url}/:topicId`} component={Topic}/>
+    <Route exact path={match.url} render={() => (
+      <h3>Please select a topic.</h3>
+    )}/>
+  </div>
+)
+
+const Topic = ({ match }) => (
+  <div>
+    <h3>{match.params.topicId}</h3>
+  </div>
+)
+
+render(<BasicExample />, document.getElementById('app'))
