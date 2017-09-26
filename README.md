@@ -21,6 +21,19 @@ npm start
 ## 浏览器查看
 浏览器输入 http://localhost:8080/
 
+## 切换示例
+
+以切换 redirectAuth示例为例  
+- 编辑`webpack.config.js`
+
+```JS
+module.exports = {
+  entry: './index.js',
+//修改为
+module.exports = {
+  entry: './redirectAuth.js',
+```
+- 运行`npm start`
 
 ## 可以学到什么？
 

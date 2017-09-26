@@ -7,6 +7,8 @@ import {
 } from 'react-router-dom'
 import { render } from 'react-dom'
 
+import './main.css'
+
 const BasicExample = () => (
   <Router>
     <div>
